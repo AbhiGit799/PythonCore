@@ -1,0 +1,71 @@
+def reverseVowels(self, s: str) -> str:
+
+the -> str part is a return type hint.
+
+def reverseVowels(self, s: str) -> str:
+
+| Part            | Meaning                                            |
+| --------------- | -------------------------------------------------- |
+| `def`           | Defines a function                                 |
+| `reverseVowels` | Function name                                      |
+| `self`          | Refers to the current object (when inside a class) |
+| `s`             | Parameter/argument                                 |
+| `s: str`        | `s` is expected to be a string                     |
+| `-> str`        | Function is expected to return a string            |
+| `:`             | Beginning of the function body                     |
+
+
+
+1. s: str
+
+This says:
+
+s: str
+
+"s is expected to contain a string."
+
+
+2. -> str
+
+This says:
+
+-> str
+
+"This function is expected to return a string."
+
+
+So the simple rule to remember is:
+
+parameter: type = type of input
+-> type = type of return value
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
