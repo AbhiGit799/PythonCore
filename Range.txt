@@ -1,0 +1,28 @@
+range(start, stop, step)
+
+
+• start (Optional): The starting integer of the sequence. Defaults to 0.
+
+• stop (Required): The integer where the sequence stops. This value is exclusive (the range stops right before this number).
+
+• step (Optional): The increment (or decrement) value between each number. Defaults to 1.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
