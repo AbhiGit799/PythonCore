@@ -151,6 +151,42 @@ for right in range(len(nums)):   # Expand the window
 print(max_length)
 
 
+So there is not way to find the exact window size in case of variable size window?
+
+
+Good question! 👍 Actually, we can calculate the exact window size in a variable-size sliding window. 
+The window size changes as left and right move.
+
+The formula is always:
+
+window size = right - left + 1
+
+
+Let's understand why we add 1.
+
+1. How do we calculate the window size?
+Suppose our window looks like this:
+
+nums = [1, 1, 0, 1, 0]
+         ↑        ↑
+        left    right
+
+Here, left = 0 and right = 4.
+
+The window contains 5 elements: indices 0, 1, 2, 3, 4.
+
+So:
+
+4 - 0 + 1 = 5
+
+
+We add 1 because the indices start at 0.
+
+
+
+
+
+
 
 '''
 

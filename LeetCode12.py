@@ -1,4 +1,17 @@
 '''
+1004. Max Consecutive Ones III
+
+Given a binary array nums and an integer k, return the maximum number of consecutive 1's in the array if you can flip at most k 0's.
+
+Example 1:
+
+Input: nums = [1,1,1,0,0,0,1,1,1,1,0], k = 2
+Output: 6
+Explanation: [1,1,1,0,0,1,1,1,1,1,1]
+
+Bolded numbers were flipped from 0 to 1. The longest subarray is underlined.
+
+
 1. Understand the problem
 
 You are given:
@@ -71,7 +84,7 @@ class Solution:
         for right in range(len(nums)):
             if nums[right] == 0:
                 zeros = zeros + 1
-            while zeros > k:
+            while zeros > k:        # Key lesson: The while loop can run multiple times in a single iteration of the for loop. It keeps moving left until the number of zeros is at most k.
                 if nums[left]==0:
                     zeros = zeros-1
                 left = left+1
@@ -109,9 +122,12 @@ Remember these three things:
 
 '''
 
+print("\n")
 
+n1 = [90,80,70]
 
-
+for right in range(len(n1)):
+    print(right)
 
 
 
