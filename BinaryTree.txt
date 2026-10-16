@@ -1,0 +1,83 @@
+Our complete learning roadmap
+*******************************
+
+Here is the roadmap we'll follow. You don't need to learn everything at once; we'll complete one topic at a time.
+
+
+Phase 1: Binary Tree Fundamentals
+Beginner
+Lessons 1–4
+- What is a Binary Tree?
+- Nodes, root, parent, child, leaf, depth and height
+- Creating a Binary Tree in Python
+- Recursive thinking and base cases
+
+
+
+
+Phase 2: Tree Traversals
+Beginner → Intermediate
+Lessons 5–8
+- Preorder: Root → Left → Right
+- Inorder: Left → Root → Right
+- Postorder: Left → Right → Root
+- Level Order Traversal using a queue (BFS)
+
+
+
+
+Phase 3: Easy LeetCode Problems
+Easy
+Lessons 9–12
+- Maximum Depth of Binary Tree
+- Same Tree
+- Invert Binary Tree
+- Symmetric Tree
+- Count Good Nodes / Leaf-related patterns as appropriate
+
+
+
+
+Phase 4: Intermediate Patterns
+Medium
+Lessons 13–18
+- Diameter of Binary Tree
+- Balanced Binary Tree
+- Lowest Common Ancestor
+- Path Sum problems
+- Subtree of Another Tree
+- Construct Tree from Traversals
+
+
+
+
+Phase 5: Advanced and Hard Problems
+Medium → Hard
+Lessons 19–24
+- Binary Search Trees (BST)
+- Serialize and Deserialize Binary Tree
+- Binary Tree Maximum Path Sum
+- Recover Binary Search Tree
+- Morris Traversal and advanced traversal patterns
+- Tree DP and harder interview patterns
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

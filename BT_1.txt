@@ -1,0 +1,113 @@
+Lesson 1: What is a Binary Tree?
+*********************************
+A Binary Tree is a data structure in which each node can have at most two children:
+- A left child
+- A right child
+
+
+
+Understand the following terms:
+******************************
+Term	              Meaning	
+Root	            Topmost node	
+Parent	            Node with a child	
+Child	            Node connected below a parent	
+Leaf	            Node with no children	
+Subtree	            A node and its descendants
+
+
+Important: Each node can have zero, one, or two children. It does not need to have exactly two.
+
+Lesson 2: How do we create a Binary Tree in Python?
+*****************************************************
+In LeetCode, most Binary Tree problems use a TreeNode class.
+
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+
+1. class TreeNode:
+Defines the blueprint for creating a tree node.
+
+
+2. def __init__(self, val=0, left=None, right=None):
+This is the constructor. It runs when we create a new node.
+- val stores the node's value.
+- left stores a reference to the left child.
+- right stores a reference to the right child.
+- None means that child does not exist.
+
+
+3. self.val = val
+Stores the value inside the current node.
+
+
+4. self.left = left and self.right = right
+Store references to the node's children.
+
+
+Lesson 3: Build your first Binary Tree
+**************************************
+
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+root = TreeNode(1)
+
+root.left = TreeNode(2)
+root.right = TreeNode(3)
+
+root.left.left = TreeNode(4)
+root.left.right = TreeNode(5)
+
+
+Dry run
+1. root = TreeNode(1) creates the root node with value 1.
+2. root.left = TreeNode(2) attaches node 2 to the left of 1.
+3. root.right = TreeNode(3) attaches node 3 to the right of 1.
+4. root.left.left = TreeNode(4) attaches node 4 to the left of node 2.
+5. root.left.right = TreeNode(5) attaches node 5 to the right of node 2.
+
+
+You can access values like this:
+
+print(root.val)             # 1
+print(root.left.val)        # 2
+print(root.right.val)       # 3
+print(root.left.left.val)   # 4
+print(root.left.right.val)  # 5
+
+
+Notice that root.left.left means: start at the root, move left once, then move left again.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
