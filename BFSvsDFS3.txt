@@ -1,0 +1,88 @@
+1. Properties of a Binary Search Tree (BST)
+**********************************************
+1. Every value in the left subtree is smaller than the current node.
+2. The current node is smaller than every value in its right subtree.
+3. Both the left and right subtrees must also follow the BST rules.
+4. Each node can have at most two children in a binary search tree.
+5. Inorder traversal (Left → Root → Right) produces values in ascending order, assuming distinct values.
+6. Duplicate values are handled according to the specific BST implementation; the standard LeetCode BST problems often require strict ordering.
+
+
+
+2. Properties of BFS (Breadth-First Search)
+********************************************
+1. The root node is visited first.
+2. Nodes are visited level by level, from top to bottom.
+3. Every node at a shallower level is visited before nodes at a deeper level.
+4. A parent node is visited before its children.
+5. When using the conventional left-to-right traversal, the left child is visited before the right child at the same parent.
+6. BFS uses a queue (FIFO — First In, First Out).
+7. BFS visits each node once, so its time complexity is \(O(n)\), where \(n\) is the number of nodes.
+8. BFS is useful for level-order traversal and finding the minimum depth of a binary tree.
+
+
+
+3. Properties of DFS (Depth-First Search)
+********************************************
+1. DFS explores one branch as deeply as possible before backtracking.
+2. The root is the starting node for a full traversal of a non-empty tree.
+3. DFS can be implemented using recursion or an explicit stack.
+4. DFS has three common traversal orders:
+   - Preorder: Root → Left → Right
+   - Inorder: Left → Root → Right
+   - Postorder: Left → Right → Root
+5. DFS visits each node once, so its time complexity is \(O(n)\).
+6. Recursive DFS uses \(O(h)\) auxiliary call-stack space, where \(h\) is the tree height.
+7. DFS is useful for tree height, path problems, subtree calculations, and recursive tree problems.
+
+
+
+4. Quick revision
+******************
+Concept	                                 Key rule
+BST	                                  Left values < current node < right values
+BFS	                                  Visit level by level
+DFS	                                  Explore deeply, then backtrack
+Preorder	                          Root → Left → Right
+Inorder	                              Left → Root → Right
+Postorder	                          Left → Right → Root
+
+
+Important: 
+=============
+BST properties describe how values are arranged in a tree. 
+
+BFS and DFS properties describe how we visit the nodes. 
+
+A tree does not need to be a BST to use BFS or DFS.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

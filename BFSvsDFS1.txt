@@ -1,0 +1,222 @@
+learn BFS and DFS in Tree DSA using Python, step by step, from beginner level to solving easy, medium, and hard LeetCode problems.
+Since you've been learning Binary Trees and recursion, we'll build on those concepts and understand why each approach works, with dry runs and practice questions.
+
+
+BFS vs DFS in Binary Trees
+==========================
+
+1. What are BFS and DFS?
+BFS and DFS are two ways to traverse (visit) every node in a binary tree.
+
+
+
+BFS — Breadth-First Search => Visit nodes level by level, from top to bottom.
+Uses a Queue
+
+DFS — Depth-First Search => Explore deeper into a branch before moving to another branch.
+Uses Recursion or a Stack
+
+
+2. Our example tree
+
+We'll use this tree throughout the lesson.
+
+Root = 1 · Left child = 2 · Right child = 3
+
+
+        1
+       / \
+      2   3
+     / \ / \
+    4  5 6  7
+
+
+3. BFS — Breadth-First Search
+
+BFS visits nodes one level at a time.
+
+The traversal order is:
+
+Level 0 => 1
+
+Level 1 => 2, 3
+
+Level 2 => 4, 5, 6, 7
+
+Final BFS order: 1, 2, 3, 4, 5, 6, 7
+
+
+How does BFS work?
+BFS uses a queue. A queue follows FIFO — First In, First Out.
+Think of people waiting in a line: the person who joins first gets served first.
+The algorithm is:
+1. Put the root node into the queue.
+2. Remove the first node from the queue and visit it.
+3. Add its left child to the queue, if it exists.
+4. Add its right child to the queue, if it exists.
+5. Repeat until the queue is empty.
+
+from collections import deque
+
+def bfs(root):
+    if root is None:
+        return []
+
+    queue = deque([root])
+    result = []
+
+    while queue:
+        node = queue.popleft()
+        result.append(node.val)
+
+        if node.left:
+            queue.append(node.left)
+
+        if node.right:
+            queue.append(node.right)
+
+    return result
+
+
+Important: 
+==========
+We use popleft() to remove the first node efficiently. Using pop(0) on a Python list is less efficient for queues.
+
+
+
+4. DFS — Depth-First Search
+*****************************
+DFS explores one branch deeply before moving to another branch.
+
+There are three common DFS traversal orders:
+
+A. Preorder — Root, Left, Right
+Visit the current node first.
+1 → 2 → 4 → 5 → 3 → 6 → 7
+
+
+B. Inorder — Left, Root, Right
+Visit the current node between its left and right subtrees.
+4 → 2 → 5 → 1 → 6 → 3 → 7
+
+
+C. Postorder — Left, Right, Root
+Visit the current node after its children.
+4 → 5 → 2 → 6 → 7 → 3 → 1
+
+
+All three are DFS. The difference is when we process the current node.
+
+A. Preorder DFS in Python
+
+def preorder(root):
+    if root is None:
+        return []
+
+    return (
+        [root.val]
+        + preorder(root.left)
+        + preorder(root.right)
+    )
+
+
+Understand these three lines:
+- [root.val] — visit the current node.
+- preorder(root.left) — traverse the left subtree.
+- preorder(root.right) — traverse the right subtree.
+The order is Root → Left → Right.
+
+B. Inorder DFS in Python
+
+def inorder(root):
+    if root is None:
+        return []
+
+    return (
+        inorder(root.left)
+        + [root.val]
+        + inorder(root.right)
+    )
+
+Here, we visit the left subtree first, then the current node, and finally the right subtree.
+The order is Left → Root → Right.
+
+
+C. Postorder DFS in Python
+
+def postorder(root):
+    if root is None:
+        return []
+
+    return (
+        postorder(root.left)
+        + postorder(root.right)
+        + [root.val]
+    )
+
+Here, we process the current node only after traversing both subtrees.
+The order is Left → Right → Root.
+
+
+5. BFS vs DFS — when should you use each?
+
+Feature	                                     BFS	                   DFS
+Main technique	                            Queue	                   Recursion or stack
+Traversal	                             Level by level	               Branch by branch
+Find minimum depth	                     Often ideal	               Also possible
+Level-order traversal	                  Ideal	                       Possible, but less direct
+Tree height	                              Possible	                   Often natural
+Path and subtree problems	              Possible	                   Often natural
+Typical complexity	                      O(n)                          O(n)
+
+
+
+
+Here, n is the number of nodes. 
+
+Both algorithms generally take O(n)  time to traverse a tree.
+
+For space complexity, BFS can use O(n)  in the worst case. 
+
+Recursive DFS uses O(h) call-stack space, 
+where h is the tree height, excluding the output list.
+
+
+Q) What is the BFS traversal order?
+
+        1
+       / \
+      2   3
+     / \
+    4   5
+
+Ans = 1, 2, 3, 4, 5
+
+BFS visits each level from left to right: first 1, then 2, 3, then 4, 5.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,247 @@
+Since you're learning Binary Trees with Python, these questions will help you understand:
+- BFS: Level-order traversal using a queue.
+- DFS: Preorder, inorder, and postorder traversals using recursion.
+- Dry runs: Predicting output without executing code.
+- Problem-solving: Choosing BFS or DFS for a given problem.
+Try answering each question before revealing the solution. I've included a mix of traversal, code-output, and concept questions.
+
+
+1. For the tree below, what is the BFS traversal?
+        1
+       / \
+      2   3
+     / \   \
+    4   5   6
+
+Ans = B. 1, 2, 3, 4, 5, 6
+BFS visits level by level: level 0 is [1], level 1 is [2, 3], and level 2 is [4, 5, 6].
+
+2. Which data structure is typically used for BFS?
+Ans = B. Queue
+A queue follows FIFO (First In, First Out), so the earliest discovered node is processed first.
+
+
+3. What is the preorder DFS order for this tree?
+Ans = C. 1, 2, 4, 5, 3
+Preorder means Root → Left → Right. Visit 1, then subtree 2 (including 4 and 5), then 3.
+
+
+4. What is the inorder DFS order for this tree?
+        1
+       / \
+      2   3
+     / \
+    4   5
+Ans = 4, 2, 5, 1, 3
+
+Inorder means Left → Root → Right. The left subtree produces 4, 2, 5, then root 1, then right child 3.
+
+
+5. What is the postorder DFS order for this tree?
+Ans => C. 4, 5, 2, 3, 1
+
+Postorder means Left → Right → Root. Finish the left subtree (4, 5, 2), then right subtree (3), then root (1).
+
+
+6. In a binary tree, what does the root mean?
+Ans =>C. The topmost starting node
+
+The root is the topmost node of a tree. It has no parent.
+
+
+7. What is the BFS traversal of a tree containing only one node with value 10?
+Ans => [10]
+The root is the only node, so BFS visits it once and returns [10].
+
+
+
+8. What should a recursive DFS function do when root is None?
+Ans => The base case stops recursion when there is no node. For traversal functions returning lists, this is commonly return [].
+
+
+9. Which traversal visits the root before both subtrees?
+Ans = Preorder 
+Preorder processes the Root first, then Left and Right.
+
+10. What is the usual time complexity of BFS or DFS when visiting every node once?
+Ans => O(n)
+
+Each of the n nodes is processed once, so traversal takes O(n) time.
+
+=================================================================================================================================================
+
+Practice Set 2: Intermediate — Dry Run the Code
+These questions are closer to what you'll encounter when solving LeetCode problems.
+
+
+11. What does this BFS code return?
+   8
+   / \
+  4   12
+Ans = A. [8, 4, 12] 
+
+BFS processes 8 first, then adds 4 and 12 to the queue. They are processed in that order.
+
+
+12. What is the output of this preorder function?
+
+    1
+   / \
+  2   3
+ /
+4
+
+Ans = 1,2,4,3
+
+The function prints the root before recursive calls. It prints 1, explores 2 and its child 4, then explores 3.
+
+
+13. What is the maximum depth of this tree?
+      1
+     /
+    2
+   /
+  3
+ /
+4
+
+Ans = 4
+
+Maximum depth counts nodes on the longest root-to-leaf path. The path 1 → 2 → 3 → 4 contains four nodes.
+
+
+
+14. Which approach is especially useful for finding the minimum depth when the tree is very wide and the first leaf is close to the root?
+Ans = A. BFS, because it can stop at the first leaf found
+
+BFS checks levels in increasing depth order. The first leaf found is at the minimum depth
+
+
+15. In recursive DFS, why do we need a base case such as if root is None: return []?
+Ans = B. To stop recursion at missing children
+
+Correct!
+A missing child has no nodes to traverse. The base case stops further recursive calls and prevents errors.
+
+
+16. A tree has n nodes. What is the worst-case auxiliary space complexity of BFS?
+Ans = O(n)
+
+Correct!
+A broad tree can have a queue containing a large fraction of all nodes, so worst-case auxiliary space is O(n).
+
+
+17. Which traversal produces sorted values for a binary search tree (BST), assuming distinct values?
+Ans = Inorder 
+A BST stores smaller values on the left and larger values on the right. Inorder visits Left → Root → Right, producing ascending order.
+
+
+18. Which statement about BFS and DFS is correct?
+Ans = C. Both can visit every node in O(n) time
+Correct!
+Both can visit every node once in O(n) time. Their memory use and suitability depend on the tree and task.
+
+
+Quick revision before your next lesson
+
+Traversal	                    Order
+
+BFS	                         Level by level
+Preorder DFS	             Root → Left → Right
+Inorder DFS	                 Left → Root → Right
+Postorder DFS	             Left → Right → Root
+
+======================================================================================================================
+
+The key is to understand why Inorder Traversal produces values in ascending order in a BST.
+
+
+1. What is a Binary Search Tree (BST)?
+A BST follows these rules:
+- Left subtree: contains values smaller than the root.
+- Right subtree: contains values larger than the root.
+- Both left and right subtrees follow the same rule.
+
+          8
+        /   \
+       4     12
+      / \   /  \
+     2   6 10  14
+
+
+
+Look at the root, 8.
+- Its left child is 4, which is smaller than 8.
+- Its right child is 12, which is larger than 8.
+- Under 4, the values 2 and 6 are smaller and larger than 4, respectively.
+- Under 12, the values 10 and 14 are smaller and larger than 12, respectively.
+Notice that 10 is greater than 8, but it belongs in the left subtree of 12. A BST rule applies to the entire subtree, not just the direct children.
+
+
+2. What is Inorder Traversal?
+Inorder traversal means:
+Left → Root → Right
+For every node, you do these three things in this order:
+1. Traverse its entire left subtree.
+2. Visit the node itself.
+3. Traverse its entire right subtree.
+Let's dry-run the example.
+Step 1: Start at root 8
+We cannot visit 8 immediately because inorder says to visit the left subtree first.
+Go to 4.
+Step 2: At node 4
+Again, go left first, so we visit 2.
+Node 2 has no left child, so visit 2. It has no right child either, so return to 4.
+Our output is now:
+[2]
+Step 3: Finish node 4
+We have finished its left subtree, so now visit 4.
+Output:
+[2, 4]
+Next, traverse the right subtree of 4, which contains 6. Visit 6.
+Output:
+[2, 4, 6]
+Step 4: Return to root 8
+The entire left subtree of 8 is finished. Now visit 8.
+Output:
+[2, 4, 6, 8]
+Step 5: Traverse the right subtree
+Go to 12. Its left child is 10, so visit 10 first, then 12, and finally 14.
+Final output:
+Inorder traversal result
+2 → 4 → 6 → 8 → 10 → 12 → 14
+The values are in ascending order, from smallest to largest.
+
+
+
+3. Why does this always work for a BST?
+The reason is the BST property:
+- Every value in the left subtree is smaller than the current node.
+- The current node is smaller than every value in its right subtree.
+Inorder processes all the smaller values first, then the current node, then all the larger values.
+Because the same rule holds recursively inside every subtree, the entire output is sorted.
+
+
+
+Remember: 
+
+Inorder traversal does not sort an arbitrary binary tree. It produces ascending order because the tree is a valid BST.
+
+
+Consider this BST:
+
+      5
+     / \
+    3   7
+   / \
+  2   4
+
+Ans = 2,3,4,5,7
+
+Visit the left subtree first (2, 3, 4), then root 5, then right child 7.
+Final result: [2, 3, 4, 5, 7].
+
+
+
+
+

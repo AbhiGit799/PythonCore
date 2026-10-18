@@ -1,0 +1,150 @@
+Let's practice "Is this a valid BST or not?" using MCQs, starting with easy questions and progressing to tricky LeetCode-style examples.
+
+Remember these two important rules:
+
+1. Every value in the left subtree must be smaller than the current node.
+2. Every value in the right subtree must be larger than the current node.
+
+
+1. Is this a valid BST?
+    8
+   / \
+  4   12
+ / \  / \
+2  6 10 14
+
+Ans => Correct!
+Every left-subtree value is smaller than its ancestor, and every right-subtree value is larger.
+
+
+2. Is this a valid BST?
+
+    8
+   / \
+  10  12
+
+Ans => Correct answer: No
+10 is the left child of 8, but 10 > 8. The left child must be smaller.
+
+
+3. Is this a valid BST?
+    8
+   / \
+  4   6
+
+Correct answer: No
+6 is in the right subtree of 8, but 6 < 8. Being greater than its parent 4 is not enough.
+
+
+4. Is this a valid BST?
+     10
+    /  \
+   5    15
+       /
+      12
+
+Correct = Yes 
+5 < 10; 12 is greater than 10 but smaller than 15; and 15 > 10. All ordering rules hold.
+
+
+5. Is this a valid BST?
+     10
+    /  \
+   5    15
+       /
+       8
+Correct answer: No
+8 is in the right subtree of 10, so it must be greater than 10. But 8 < 10.
+
+
+6. Is this a valid BST?
+     20
+    /  \
+   10   30
+     \
+      25
+Correct answer: No
+25 is in the left subtree of 20, so it must be less than 20. Although 25 > 10, it violates the ancestor rule.
+
+
+7. Is this a valid BST?
+    5
+   / \
+  3   7
+ /     \
+2       9
+
+Ans = Yes 
+2 < 3 < 5 and 9 > 7 > 5. All values obey the ancestor constraints.
+
+
+8. Is this a valid BST under strict ordering (no duplicates)?
+    5
+   / \
+  3   7
+   \
+    5
+
+Ans = No 
+
+Correct!
+The duplicate 5 violates strict BST ordering. Standard validation problems generally disallow duplicate values.
+
+
+9. Which traversal should produce ascending values for this valid BST?
+Ans = Inorder visits Left → Root → Right and returns 2, 5, 8, 10, 12, 15, 20.
+
+
+10. Is this a valid BST?
+     10
+    /  \
+   5    15
+    \
+     12
+Ans => No 
+12 is in the left subtree of 10, so it must be smaller than 10. But 12 > 10.
+
+
+Note => Keep practicing. Check each node against all its ancestors, not just its parent.Try again
+
+
+The most important trick for LeetCode
+Consider this tree:
+
+      10
+     /  \
+    5    15
+     \
+      12
+
+At first glance, it might look valid because 12 > 5.
+But it is not a valid BST because 12 is in the left subtree of 10, and every value in that subtree must be smaller than 10.
+This is one of the most common mistakes in LeetCode's 98. Validate Binary Search Tree.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

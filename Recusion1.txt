@@ -1,0 +1,199 @@
+Recursion in DSA — Beginner-Friendly Guide
+
+Since you're learning DSA in Python, let's understand recursion step by step with simple examples, dry runs, and practice problems.
+
+
+1. What is recursion?
+
+Recursion is when a function calls itself to solve a smaller version of the same problem.
+Imagine you're climbing down a staircase. At every step, you move down one more step until you reach the ground. Recursion works similarly: a function keeps calling itself until it reaches a stopping point.
+
+
+
+2. The two important parts of recursion
+Every basic recursive solution needs two key components.
+
+1. Base case
+This tells the function when to stop calling itself.
+                        ****************************
+Note => Without a proper stopping condition, recursion may continue until Python raises a RecursionError.
+
+2. Recursive case
+This is where the function calls itself with a smaller or simpler input.
+                                 **************************************
+Each call moves the problem closer to the base case.
+
+
+3. Dry run: How does recursion work?
+Consider this code again:
+
+
+def count(n):
+    if n == 0:
+        return
+
+    print(n)
+    count(n - 1)
+
+count(3)
+
+Let's trace it step by step.
+
+
+count(3)
+Prints 3 → calls count(2)
+
+
+count(2)
+Prints 2 → calls count(1)
+
+
+count(1)
+Prints 1 → calls count(0)
+
+
+count(0)
+Base case reached → returns
+
+
+The output is 3, 2, 1 because print(n) happens before the recursive call.
+Notice that each call has its own value of n. The original call has n = 3, the next has n = 2, and so on.
+
+
+4. What happens when recursion returns?
+This is one of the most important concepts in recursion.
+
+def count(n):
+    if n == 0:
+        return
+
+    count(n - 1)
+    print(n)
+
+count(3)
+
+What do you think the output will be?
+The answer is:
+
+1
+2
+3
+
+Why? Because print(n) is now after the recursive call.
+Here's the execution:
+
+Going down — function calls
+count(3)
+count(2)
+count(1)
+count(0)
+
+
+Coming back — print statements execute
+Print 1
+Print 2
+Print 3
+
+
+
+This process of returning through previous function calls is called unwinding the recursion.
+
+Python keeps track of unfinished function calls using the call stack. Each call stays on the stack until it finishes.
+
+
+5. Example: Calculate factorial using recursion
+
+Factorial is a common recursion problem in DSA.
+
+For example:
+5! = 5 \times 4 \times 3 \times 2 \times 1 = 120
+
+
+We can define factorial like this:
+
+- 5! = 5 X 4!
+- 4! = 4 X 3!
+- 3! = 3 X 2!
+- 1! = 1
+
+Notice that each problem depends on a smaller factorial.
+
+
+def factorial(n):
+    if n == 1:
+        return 1
+
+    return n * factorial(n - 1)
+
+print(factorial(5))
+
+
+One important detail: return n * factorial(n - 1) cannot calculate the multiplication completely until the smaller factorial call returns.
+
+
+For production code, you would also handle inputs such as n = 0 and negative numbers. Mathematically, \(0! = 1\).
+
+
+6. Recursion vs. loops
+************************
+
+You can solve many problems using either recursion or loops.
+
+Feature	                             Recursion	                                            Loop
+How it works	                     Function calls itself	                             Repeats statements
+Stopping condition	                 Base case	                                         Loop condition
+Memory	                             Uses call stack	                                 Usually less extra memory
+Common uses	                         Trees, backtracking, divide and conquer	         Array traversal, counting
+Main risk	                         Stack overflow / recursion limit	                 Infinite loop
+
+
+7. Why is recursion important for DSA?
+
+Since you are also learning binary trees, recursion is particularly important for you.
+
+1. Binary trees
+Calculate tree height, count nodes, and traverse left and right subtrees.
+
+2. Divide and conquer
+Merge Sort and Quick Sort break a problem into smaller problems.
+
+3. Backtracking
+Explore possible paths or choices in problems such as maze solving and generating combinations.
+
+
+For example, when calculating the maximum depth of a binary tree, you can recursively calculate the depth of the left subtree and the right subtree:
+
+
+
+def maxDepth(root):
+    if root is None:
+        return 0
+
+    left_depth = maxDepth(root.left)
+    right_depth = maxDepth(root.right)
+
+    return 1 + max(left_depth, right_depth)
+
+
+The base case is root is None. The recursive calls calculate each subtree's depth, and 1 + counts the current node's level. This is a practical example of recursion in tree DSA.
+
+
+
+
+9. Your recursion learning roadmap
+
+Here is the order I recommend for mastering recursion in DSA:
+1. Recursion fundamentals — base cases, recursive calls, call stack.
+2. Dry runs and tracing — understand how calls return.
+3. Simple problems — print numbers, sum of numbers, factorial.
+4. Arrays and strings — reverse a string, check a palindrome.
+5. Binary tree recursion — maximum depth, leaf-similar trees, node counting.
+6. Advanced recursion — subsets, permutations, backtracking.
+7. Divide and conquer — Merge Sort and Quick Sort.
+
+
+My recommendation: Don't try to memorize recursive code. For every problem, first identify the base case, then identify how the function makes its problem smaller, and finally trace the return values.
+
+
+
+

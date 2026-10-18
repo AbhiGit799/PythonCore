@@ -1,0 +1,140 @@
+Lesson 2: Binary Tree Traversals in Python
+
+Today, we'll learn one of the most important concepts in Binary Tree DSA: Tree Traversal.
+Traversal means visiting every node in a tree in a specific order.
+By the end of this lesson, you'll understand three depth-first traversal techniques:
+1. Preorder — Root → Left → Right
+2. Inorder — Left → Root → Right
+3. Postorder — Left → Right → Root
+
+
+1. Our example Binary Tree
+We'll use the same tree from our previous lesson.
+Root = 1, left subtree = 2, 4, 5, right subtree = 3
+
+Python Code for this tree 
+**************************
+root = TreeNode(1)
+root.left = TreeNode(2)
+root.right = TreeNode(3)
+root.left.left = TreeNode(4)
+root.left.right = TreeNode(5)
+
+
+
+The tree structure stays the same. Only the order in which we visit the nodes changes.
+
+
+2. Preorder Traversal
+======================
+Rule: Root → Left → Right
+Remember: we visit the current node first, then its left subtree, then its right subtree.
+
+Step-by-step traversal
+Output: [1, 2, 4, 5, 3]
+
+def preorder(root):
+    if root is None:
+        return
+
+    print(root.val)
+    preorder(root.left)
+    preorder(root.right)
+
+
+Dry run
+*******
+For preorder(root), the execution goes like this:
+1. Visit 1.
+2. Move left to 2, and visit 2.
+3. Move left to 4, and visit 4.
+4. Node 4 has no children, so return to 2.
+5. Move right to 5, and visit 5.
+6. The left subtree is complete. Return to 1.
+7. Move right to 3, and visit 3.
+Final output: 1 2 4 5 3
+Key idea: The print() statement comes before both recursive calls, so the root is visited first.
+
+
+3. Inorder Traversal
+=======================
+Rule: Left → Root → Right
+This time, we visit the left subtree before visiting the current node.
+
+def inorder(root):
+    if root is None:
+        return
+
+    inorder(root.left)
+    print(root.val)
+    inorder(root.right)
+
+Notice the difference from preorder: print(root.val) has moved between the two recursive calls.
+
+
+Start at 1. Go left to 2.
+From 2, go left to 4.
+4 has no left child, so print 4.
+Return to 2, and print 2.
+Go right to 5, and print 5.
+Return to 1, and print 1.
+Finally, visit and print 3.
+
+Output: [4, 2, 5, 1, 3]
+
+Key idea: The root is printed only after its left subtree has been processed.
+
+
+
+4. Postorder Traversal
+==========================
+Rule: Left → Right → Root
+In this traversal, we visit both subtrees before visiting the current node.
+Python code
+
+def postorder(root):
+    if root is None:
+        return
+
+    postorder(root.left)
+    postorder(root.right)
+    print(root.val)
+
+
+Notice that print(root.val) is now the last statement.
+
+
+Dry run
+1. Start at 1, then go left to 2.
+2. Go left to 4. It has no children, so print 4.
+3. Go right to 5. Print 5.
+4. Both children of 2 are finished, so print 2.
+5. Move back to 1, then visit and print 3.
+6. Both subtrees of 1 are finished, so print 1.
+
+Output: [4, 5, 2, 3, 1]
+
+Key idea: A node is printed only after its left and right subtrees have been processed.
+
+
+5. Compare all three traversals
+The most important thing to remember is that the recursive calls stay in the same order. We only move the print() statement.
+
+
+Traversal	             Order	                            Output
+Preorder	            Root → Left → Right	               [1, 2, 4, 5, 3]
+Inorder	                Left → Root → Right	               [4, 2, 5, 1, 3]
+Postorder	            Left → Right → Root	               [4, 5, 2, 3, 1]
+
+A simple trick to remember:
+- Preorder: print the root before recursion.
+- Inorder: print the root in between recursion calls.
+- Postorder: print the root after recursion.
+
+
+All three traversals take (O(n)) time because each node is visited once. 
+Their recursive stack space is (O(h)), where (h) is the tree height.
+
+
+
+

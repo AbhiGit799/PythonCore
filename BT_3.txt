@@ -1,0 +1,40 @@
+Lesson 3: Level Order Traversal (BFS) in Binary Trees
+
+In our previous lesson, we learned Preorder, Inorder, and Postorder traversal using recursion.
+Today, we'll learn Level Order Traversal, which is also called Breadth-First Search (BFS).
+This is an important pattern for LeetCode problems involving tree levels, the right side of a tree, minimum depth, and more.
+
+
+1. What is Level Order Traversal?
+Level Order Traversal means visiting the nodes level by level, from left to right.
+
+
+
+Compare this with preorder traversal:
+- Preorder: [1, 2, 4, 5, 3]
+- Level order: [1, 2, 3, 4, 5]
+
+The difference is that BFS visits all nodes at the current level before going deeper.
+
+
+2. Why do we need a queue?
+To implement BFS, we use a queue.
+A queue follows FIFO: First In, First Out.
+Think of people standing in a line. The first person who joins the line is the first person served.
+Python provides a convenient queue implementation through collections.deque.
+
+from collections import deque
+
+We'll use two main operations:
+
+Operation	                        Meaning
+queue.append(node)	                Add a node to the back
+queue.popleft()	                    Remove the node at the front
+
+Why do we need a queue? When we visit a node, we add its children to the queue. The children wait their turn until the earlier nodes have been processed.
+
+3. Level Order Traversal — Python solution
+This is the standard LeetCode solution for 102. Binary Tree Level Order Traversal.
+
+
+
