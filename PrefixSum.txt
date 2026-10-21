@@ -1,0 +1,207 @@
+Prefix Sum in DSA — Beginner-Friendly Explanation
+Prefix Sum is a technique in DSA that helps us calculate the sum of a range of elements quickly without repeatedly adding every element.
+
+
+1. What is Prefix Sum?
+Suppose we have this array:
+
+nums = [2, 4, 1, 3, 5]
+
+
+A prefix sum is the sum of all elements from the beginning of the array 
+up to the current position.
+
+
+Original array
+***************
+2
+Index 0
+
+4
+Index 1
+
+1
+Index 2
+
+3
+Index 3
+
+5
+Index 4
+
+
+Prefix sum array
+******************
+2
+Index 0
+
+6
+Index 1
+
+7
+Index 2
+
+10
+Index 3
+
+15
+Index 4
+
+
+For example, the prefix sum at index 3 is 2+4+1+3=10
+
+We calculate it as follows:
+Index	Number	Prefix sum calculation	Result
+0	      2	         2	                 2
+1	      4	         2 + 4	             6
+2	      1	         6 + 1	             7
+3	      3	         7 + 3	             10
+4	      5	         10 + 5	             15
+
+Notice the pattern: current prefix sum = previous prefix sum + current number.
+
+
+
+Prefix Sum Formula
+*******************
+
+RangeSum(L,R) = prefix|R| - prefix|L-1|
+
+- L = Left index — the starting index of the range.
+
+- R = Right index — the ending index of the range.
+
+They refer to positions in an array,
+
+
+=============================================================================================================
+
+Need of Prefix Sum 
+*******************
+
+1. Imagine this situation
+You have this array:
+
+nums = [2, 4, 1, 3, 5]
+
+
+You need to find the sum from index 1 to index 3.
+
+The simple approach:
+
+nums = [2, 4, 1, 3, 5]
+
+total = 0
+
+for i in range(1, 4):
+    total += nums[i]
+
+print(total)  # 8
+
+
+This is perfectly fine! It takes O(n) time in the worst case, 
+where n is the number of elements in the range.
+
+
+
+2. Now imagine 10,000 questions
+
+Suppose the interviewer asks you to calculate the sum of 10,000 different ranges in the same array.
+
+Without prefix sum, you repeatedly visit the elements in each range.
+
+With prefix sum, you calculate the prefix sums once and answer each question using subtraction.
+
+
+Compare the two approaches
+***************************
+Without Prefix Sum
+O(n × q)
+Repeatedly add elements for each query.
+
+With Prefix Sum
+O(n + q)
+Build once, then answer each query quickly.
+
+
+For example, if the array contains 100,000 elements and you have 10,000 queries, 
+repeatedly scanning large ranges could require hundreds of millions of additions. 
+Prefix sums let each query use just one subtraction after preprocessing.
+
+That's the real benefit: we do a little extra work upfront to avoid doing the same work again and again.
+
+
+4. So, should you use Prefix Sum everywhere?
+
+No! Choose the simplest approach that solves the problem efficiently.
+
+Situation	                                                 Good approach
+Calculate a sum once	                                     Simple loop
+Answer many range-sum queries	                             Prefix sum
+Find subarrays with a target sum	                         Often prefix sum + dictionary
+LeetCode 437, Path Sum III	                                 Prefix sum + dictionary can improve efficiency
+
+=============================================================================================================
+
+
+1. What is Prefix Sum?
+Prefix Sum is a technique that stores the cumulative sum of array elements 
+so we can calculate range sums quickly without repeatedly adding the same elements.
+
+
+2. How to calculate Prefix Sum
+Formula:
+
+prefix[i] = prefix[i-1] + nums[i]
+
+Remember: current prefix sum = Previous prefix sum + current element
+
+
+3. How to calculate a range sum
+Formula:
+         sum(L,R) = prefix|R| - prefix|L-1|
+
+L = starting index of the range.
+R = ending index of the range.
+prefix[R] = sum from index 0 to R.
+prefix[L-1] = sum of the elements before the range.
+
+
+Special case: If L = 0, the range sum is simply prefix[R], because there are no elements before the range to subtract.
+
+
+4. Why do we need Prefix Sum?
+We don't need it for every problem!
+- One sum calculation: A simple loop is usually enough.
+- Many range-sum queries: Prefix sum avoids repeatedly adding the same elements.
+- Target-sum subarray problems: Prefix sum combined with a dictionary can help find valid subarrays efficiently.
+
+
+
+5. Time and space complexity
+
+Operation	                               Complexity
+Build prefix sum	                           O(n)
+Answer each range-sum query	                   O(1)
+Extra space	                                   O(n)
+
+Here, n is the number of array elements.
+
+
+6. Key points to remember
+- Prefix sum stores cumulative sums.
+- The first prefix sum equals the first array element.
+- Each next prefix sum is the previous prefix sum plus the current element.
+- L and R refer to array indices, not tree nodes.
+- Prefix sum is useful when it saves repeated calculations.
+- For a single sum, a simple loop may be easier and perfectly efficient.
+
+
+
+
+
+
+
+
+
+

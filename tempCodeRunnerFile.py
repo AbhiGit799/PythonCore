@@ -1,2 +1,2 @@
-root.left = TreeNode(100)
-# root.right = TreeNode(31)
+print(prefix[0])
+# print(prefix.get(0))
