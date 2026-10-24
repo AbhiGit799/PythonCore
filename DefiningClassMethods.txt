@@ -1,0 +1,140 @@
+what is the difference?
+
+1. Keep it inside the class and write def printList(self, head):.
+2. Move it outside the class and call printList(result).
+
+The main difference is whether printList() belongs to the Solution class or exists as a standalone function.
+
+Let's understand both approaches with simple Python examples.
+1. Keep printList() inside the class
+
+class Solution:
+    def printList(self, head):
+        current = head
+
+        while current:
+            print(current.val, end=" -> ")
+            current = current.next
+
+        print("None")
+
+
+How do we call it?
+
+obj = Solution()
+obj.printList(result)
+
+
+Why do we use self?
+
+When you call obj.printList(result), Python automatically passes obj as the first argument, self.
+
+Conceptually, Python handles the call like this:
+
+Solution.printList(obj, result)
+
+So:
+- self refers to the Solution object (obj).
+- head receives result, the linked-list head.
+Here, printList() is an instance method because it belongs to an instance of the class.
+
+
+2. Move printList() outside the class
+
+def printList(head):
+    current = head
+
+    while current:
+        print(current.val, end=" -> ")
+        current = current.next
+
+    print("None")
+
+
+How do we call it?
+
+printList(result)
+
+Here, Python passes result directly to the head parameter.
+
+There is no self because this function doesn't belong to a class.
+
+This is a standalone function.
+
+
+
+Compare both approaches
+======================
+Feature	                              Inside the class	                 Outside the class
+Definition	                       def printList(self, head):	           def printList(head):
+How to call	                         obj.printList(result)	               printList(result)
+Uses self?	                                    Yes	                            No
+Belongs to Solution?	                        Yes                        	    No
+Can access instance attributes through self?	Yes	                       No automatic instance access
+
+
+
+=========================================================================================================================
+
+
+Yes! In Python, you must declare a parameter to receive the instance when defining an instance method. By convention, we call that parameter self.
+
+Let's understand this with a simple example.
+1. Correct way — using self
+
+class Solution:
+    def greet(self):
+        print("Hello!")
+
+obj = Solution()
+obj.greet()
+
+
+
+
+What happens behind the scenes?
+
+When you write:
+
+obj.greet()
+
+
+Python automatically passes obj as the first argument. Conceptually, this is equivalent to:
+
+
+Solution.greet(obj)
+
+
+That's why we declare self in the method definition.
+
+2. What happens if we don't declare self?
+
+class Solution:
+    def greet():
+        print("Hello!")
+
+obj = Solution()
+obj.greet()
+
+
+You will get a TypeError because Python passes obj automatically, but greet() doesn't accept any parameters.
+
+3. Must the parameter be named self?
+Technically, no. The name self is a convention, not a Python keyword.
+
+class Solution:
+    def greet(this):
+        print("Hello!")
+
+obj = Solution()
+obj.greet()
+
+This works! However, always use self because it is the standard convention followed by Python developers.
+
+
+
+
+
+
+
+

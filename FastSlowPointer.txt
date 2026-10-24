@@ -1,0 +1,136 @@
+Fast and Slow Pointers in DSA (Python)
+======================================
+
+The Fast and Slow Pointer technique uses two variables to move through a data structure at different speeds.
+- Slow pointer: Moves one step at a time.
+- Fast pointer: Moves two steps at a time.
+
+This technique is especially useful for linked lists, finding the middle element, and detecting cycles.
+
+
+1. Understand the concept with an example
+
+Suppose we have this linked list:
+
+10 -> 20 -> 30 -> 40 -> 50
+
+
+Imagine both pointers start at node 10.
+- Slow moves from 10 to 20.
+- Fast moves from 10 to 30.
+
+On the next move:
+
+- Slow moves from 20 to 30.
+- Fast moves from 30 to 50.
+
+When fast reaches the end, slow is at the middle (or near the middle, depending on list length).
+
+This is how we find the middle of a linked list without counting all the nodes first.
+
+
+2. Python code: Find the middle of a linked list
+
+slow = head
+fast = head
+
+while fast and fast.next:
+    slow = slow.next
+    fast = fast.next.next
+
+return slow
+
+
+Let's understand each line.
+
+Code	                                    Meaning
+slow = head	                          Slow starts at the first node.
+fast = head	                          Fast also starts at the first node.
+while fast and fast.next:	         Continue while fast can safely move two steps.
+slow = slow.next	                 Move slow forward by one node.
+fast = fast.next.next	             Move fast forward by two nodes.
+return slow	                         Return the middle node.
+
+
+Dry run
+For this list: 10 → 20 → 30 → 40 → 50
+
+Step	Slow pointer	Fast pointer
+Start	  10         	10
+1	      20	        30
+2	      30	        50
+Stop	  30  	        End
+
+Answer: 30, the middle node.
+
+Why does the loop stop? Because fast.next is None when fast reaches node 50, so fast cannot move another two steps.
+
+
+
+
+3. Another important use: Detect a cycle
+
+Consider a linked list where the last node points back to an earlier node:
+
+This creates a loop: 2 → 3 → 4 → 2 → 3 → ...
+
+The fast pointer moves two steps while the slow pointer moves one. If a cycle exists, they will eventually meet at the same node.
+
+slow = head
+fast = head
+
+while fast and fast.next:
+    slow = slow.next
+    fast = fast.next.next
+
+    if slow == fast:
+        return True
+
+return False
+
+Here, slow == fast checks whether both variables point to the exact same node, not merely nodes with equal values.
+
+4. When should you use this technique?
+
+Problem	                                              How fast/slow pointers help
+Find middle of linked list	                          Fast moves twice as quickly.
+Detect linked-list cycle	                          Check whether the pointers meet.
+Find the start of a cycle	                          Use the meeting point and move pointers according to the cycle algorithm.
+Find duplicate number in an array	                  Model array values as links and detect a cycle.
+
+
+
+Yes! ✅ The Fast and Slow Pointer technique works for linked lists with both odd and even numbers of nodes.
+
+==========================================================================================================================================
+
+
+Fast and Slow Pointer — LeetCode Practice Roadmap
+
+Since you're learning DSA in Python, I recommend solving these problems in order, from easy to medium and then harder problems.
+
+The technique has two main patterns:
+- Pattern 1: Middle of a linked list — slow moves one step; fast moves two steps.
+- Pattern 2: Cycle detection — if a cycle exists, the two pointers eventually meet.
+There is also a third variation: treating an array like a linked list to find a duplicate number.
+
+1. Beginner level — Learn the basics
+1. 876. Middle of the Linked List
+2. 141. Linked List Cycle
+3. 234. Palindrome Linked List
+
+2. Medium level — Apply the technique
+These problems combine fast and slow pointers with other concepts.
+4. 142. Linked List Cycle II
+5. 143. Reorder List
+6. 2095. Delete the Middle Node of a Linked List
+7. 2130. Maximum Twin Sum of a Linked List
+8. 287. Find the Duplicate Number
+9. 202. Happy Number
+10. 19. Remove Nth Node From End of List
+11. 457. Circular Array Loop
+
+
+
+
+
