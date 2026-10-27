@@ -1,0 +1,63 @@
+
+
+
+
+BFS (Breadth-First Search) in a tree means visiting nodes level by level, starting from the root.
+
+It is also called Level Order Traversal.
+
+BFS visits the tree like this:
+Level 0
+
+1
+
+Level 1
+
+2 → 3
+
+Level 2
+
+4 → 5
+
+
+BFS output: [1, 2, 3, 4, 5]
+
+How to implement BFS in Python
+BFS commonly uses a queue (first in, first out).
+
+from collections import deque
+
+def bfs(root):
+    if root is None:
+        return
+
+    queue = deque([root])
+
+    while queue:
+        node = queue.popleft()
+        print(node.val)
+
+        if node.left:
+            queue.append(node.left)
+
+        if node.right:
+            queue.append(node.right)
+
+
+How it works
+1. queue = deque([root]) — add the root to the queue.
+2. queue.popleft() — remove and visit the first node.
+3. queue.append(node.left) — add the left child.
+4. queue.append(node.right) — add the right child.
+5. Repeat until the queue is empty.
+
+BFS vs DFS
+=============
+BFS	                                                       DFS
+1) Visits level by level	                         Goes deep along a branch first
+2) Usually uses a queue	                             Usually uses recursion or a stack
+3) Useful for level-order traversal                    3) Useful for tree depth, paths, and many recursive tree problems 
+and shortest paths in unweighted graphs	
+
+Remember: BFS = level by level; DFS = go deep first.
+
