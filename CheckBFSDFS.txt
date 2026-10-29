@@ -1,0 +1,112 @@
+To identify whether a Binary Tree problem needs BFS or DFS, first look at what the question is asking you to find.
+
+## 1. Simple rule to remember
+
+[Binary Tree Level Order Traversal](https://images.openai.com/static-rsc-4/k01PWlKEEGItwUNBSK4JsZ-9jxouaVxStgsaWkp4LKxeBcFDorcpli99vnZWkYWpXzbtlZCHuakwFbBt7ZfpjzYtf-yR5rwJAl5wZYqYjFDgE4RFKHfMk8fWGeKJbZvKdSZCY8Q7ir_2eYKaYfxTEDo2X1M2oT_AYAzvon59wjQ?purpose=inline)
+
+### BFS — Level by level
+
+Use BFS when the problem asks about:
+
+- Each level of a tree
+- Maximum or minimum level sum
+- Left-side or right-side view
+- Level order traversal
+
+[DFS/BFS 개념 및 문제 접근 방법](https://images.openai.com/static-rsc-4/qBIv4TSnoZEz9cd_I7W8iH1Ltzsd9vDF9fKzDasEPw3wHiCOmfBIExaoWN3559PwdRGbOjnjjcBD02S_9iEO4koEsimHNAtGiD-bj7UPGu4rztF21HMEF3mtfLu2GowInGfgvHEh4vITKO5eBOoGyOGEvAV2PL7PfNi93KesE4E?purpose=inline)
+
+### DFS — Go deep first
+
+Use DFS when the problem asks about:
+
+- Maximum depth or height
+- Finding a path from root to a node
+- Checking whether a path has a target sum
+- Comparing or validating subtrees
+
+## 2. Use your LeetCode problems as examples
+
+| Problem                          | Best starting approach | Why?                                  |
+| -------------------------------- | ---------------------- | ------------------------------------- |
+| 199. Binary Tree Right Side View | BFS                    | Find the rightmost node at each level |
+| 1161. Maximum Level Sum          | BFS                    | Calculate each level's sum            |
+| 104. Maximum Depth               | DFS                    | Calculate depth recursively           |
+| 236. Lowest Common Ancestor      | DFS                    | Search left and right subtrees        |
+| 112. Path Sum                    | DFS                    | Explore root-to-leaf paths            |
+
+These are common approaches, not strict rules. Many tree problems can be solved using either BFS or DFS.
+
+## 3. How to identify the approach in an interview
+
+Ask yourself these questions in order:
+
+## 1
+
+Does the problem ask about levels?
+
+Examples: level sum, level order, right-side view.
+
+→ Start with BFS.
+
+## 2
+
+Does it ask about paths, depth, or subtree results?
+
+Examples: maximum depth, path sum, lowest common ancestor.
+
+→ Start with DFS.
+
+## 3
+
+Still unsure?
+
+Draw a small tree and ask whether you need to process nodes level by level or explore branches recursively.
+
+## 4. Test your understanding
+
+1\. Find the maximum sum among all tree levels.
+
+BFS
+
+DFS
+
+Correct!
+
+2\. Check whether a root-to-leaf path sums to a target.
+
+BFS
+
+DFS
+
+Correct!
+
+3\. Find the rightmost node at every level.
+
+BFS
+
+DFS
+
+Correct!
+
+Check answers
+
+Interview tip: Don't choose BFS or DFS just because of a keyword. Identify what information you need from the tree. That usually tells you which approach is simpler.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
