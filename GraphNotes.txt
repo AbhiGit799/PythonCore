@@ -1,0 +1,301 @@
+Graph in DSA — Beginner's Guide for LeetCode
+===============================================
+
+A Graph is a data structure used to represent connections between things. It is an important topic for solving LeetCode problems, 
+especially problems involving networks, paths, grids, and connected components.
+
+Let's learn it step by step using simple examples and Python.
+
+1. What is a Graph?
+*********************
+Think about a social network:
+- Person A is friends with Person B.
+- Person B is friends with Person C.
+- Person A may not be directly friends with Person C.
+We can represent these relationships using a graph.
+
+
+
+A graph consists of two main parts:
+- Vertex (Node): An individual item, such as a person or a city.
+- Edge: A connection between two nodes.
+For example, in a map, cities are nodes and roads are edges.
+
+
+2. Types of Graphs
+*********************
+You should understand these graph types before starting LeetCode problems.
+
+Type 1: Undirected Graph
+==========================
+A connection works in both directions.
+
+Example: If A and B are friends, both have a friendship connection.
+
+
+Type 2: Directed Graph
+========================
+A connection has a specific direction.
+
+Example: A website links to another website, but the second website may not link back.
+
+
+Type 3: Weighted Graph
+========================
+Each edge has a value or cost called a weight.
+
+Example: Cities connected by roads, where each road has a travel distance or cost.
+
+
+Type 4: Unweighted Graph
+=========================
+Edges have no explicit weights. Each connection is treated equally.
+
+Example: A simple friendship network where we only care whether two people are connected.
+
+Type 5: Cyclic and Acyclic Graphs
+==================================
+Cyclic graph
+
+You can start at a node, follow connections and return to the starting node without repeating an edge.
+
+Example: A → B → C → A.
+
+Acyclic graph
+
+Contains no cycles. A directed acyclic graph is called a DAG.
+
+Example: A course prerequisite structure.
+
+Important: A tree is a special kind of connected, undirected, acyclic graph. Since you have already studied binary trees, this connection will help you learn graphs.
+
+
+
+3. How do we represent a graph in Python?
+*********************************************
+
+This is one of the most important concepts for LeetCode.
+
+Suppose we have these connections:
+- A is connected to B.
+- A is connected to C.
+- B is connected to D.
+- C is connected to D.
+
+
+There are two common ways to store this graph.
+
+
+Method 1: Adjacency List
+==========================
+An adjacency list stores each node and the nodes connected to it.
+
+graph = {
+    "A": ["B", "C"],
+    "B": ["A", "D"],
+    "C": ["A", "D"],
+    "D": ["B", "C"]
+}
+
+For example:
+
+print(graph["A"])
+
+Output => ['B', 'C']
+
+
+Remember: An undirected graph usually lists each connection in both nodes' neighbor lists.
+
+
+Method 2: Adjacency Matrix
+============================
+A matrix uses 0 and 1 to show whether two nodes are connected.
+
+
+matrix = [
+    [0, 1, 1, 0],  # A
+    [1, 0, 0, 1],  # B
+    [1, 0, 0, 1],  # C
+    [0, 1, 1, 0]   # D
+]
+
+
+For example, matrix[0][1] == 1 means A is connected to B.
+Representation	Best to know when
+Adjacency list	Most general graph problems
+Adjacency matrix	Graphs given as a matrix or when checking connections between pairs
+
+For beginners solving LeetCode, learn adjacency lists first.
+
+
+
+4. Two important graph algorithms: BFS and DFS
+*************************************************
+BFS and DFS are methods for visiting nodes in a graph.
+
+a) BFS — Breadth-First Search
+==============================
+BFS visits nearby nodes first, level by level.
+
+Starting at A in our example:
+
+Visiting order (one possible order)
+
+
+A {Start} B {Level1} C{Level1} D{Level2}
+
+
+BFS uses a queue (first in, first out).
+=========================================
+
+from collections import deque
+
+def bfs(graph, start):
+    queue = deque([start])
+    visited = {start}
+
+    while queue:
+        node = queue.popleft()
+        print(node)
+
+        for neighbor in graph[node]:
+            if neighbor not in visited:
+                visited.add(neighbor)
+                queue.append(neighbor)
+
+
+
+bfs(graph, "A")
+
+Possible output:
+
+A
+B
+C
+D
+
+Why do we need visited? Because graphs can contain cycles, and we don't want to visit the same node repeatedly.
+
+Note
+======
+BFS is especially useful for finding the shortest path in an unweighted graph.
+
+
+b) DFS — Depth-First Search
+==========================
+DFS follows one path as far as possible before returning to explore another path.
+
+A simple recursive version:
+
+def dfs(graph, node, visited):
+    if node in visited:
+        return
+
+    visited.add(node)
+    print(node)
+
+    for neighbor in graph[node]:
+        dfs(graph, neighbor, visited)
+
+dfs(graph, "A", set())
+
+Output
+=======
+A
+B
+D
+C
+
+
+The exact order depends on the order of neighbors in the graph.
+
+DFS is useful for exploring paths, detecting cycles, counting connected components, and solving many island/grid problems.
+
+
+5. Graph problems can also be grids
+*************************************
+Not every graph problem gives you a dictionary of nodes and edges.
+
+Consider this grid:
+
+1  1  0
+0  1  0
+1  0  1
+
+
+In LeetCode's 200. Number of Islands, each 1 represents land and each 0 represents water.
+
+Adjacent land cells are treated as connected nodes. You can use DFS or BFS to explore each island.
+
+This is an important insight: a grid can be treated as a graph, even if you never build a separate adjacency list.
+
+
+
+6. How to identify a graph problem on LeetCode
+**********************************************
+Look for these clues in the question.
+
+Problem statement mentions                                  	Technique to consider
+Nodes, edges, connections	                                   Graph representation
+Is there a path between two nodes?	                           BFS or DFS
+Minimum number of steps	                                       BFS for unweighted graphs
+Number of islands or connected groups	                       DFS or BFS
+Prerequisites or task dependencies	                           Directed graph, topological sorting
+Cycles in connections	                                       Cycle detection
+Minimum cost or distance with weights	                       Dijkstra's algorithm or another shortest-path algorithm, depending on the weights
+All possible paths	                                           DFS or backtracking
+
+These are starting clues, not strict rules. Some problems require combinations of techniques.
+
+
+
+7. Recommended LeetCode learning order
+***************************************
+Learn graph problems in this order rather than trying to solve everything at once.
+
+Stage 1: Graph basics
+Learn nodes, edges, adjacency lists, adjacency matrices, and visited sets.
+Practice: LeetCode 1971 — Find if Path Exists in Graph
+
+
+Stage 2: DFS and BFS
+Practice traversing graphs and counting connected components.
+Practice: LeetCode 547 — Number of Provinces
+
+
+Stage 3: Grid-based graphs
+Practice visiting adjacent cells and marking explored land.
+Practice: LeetCode 200 — Number of Islands
+
+
+Stage 4: Directed graphs and cycles
+Learn prerequisites, cycle detection, and topological sorting.
+Practice: LeetCode 207 — Course Schedule
+
+
+Stage 5: Shortest paths
+Learn Dijkstra's algorithm and when BFS is sufficient.
+Practice: LeetCode 743 — Network Delay Time
+
+
+8. Quick revision
+- Graph: Nodes plus edges.
+- Undirected: Connections work both ways.
+- Directed: Connections have a direction.
+- Weighted: Connections have costs or distances.
+- Adjacency list: Stores each node's neighbors.
+- BFS: Uses a queue and explores level by level.
+- DFS: Explores deeply before backtracking.
+- Visited set: Prevents repeatedly exploring nodes.
+- Grid problems: Can be solved by treating cells as graph nodes.
+Since you're learning DSA in Python, I recommend starting with LeetCode 1971 — Find if Path Exists in Graph. Learn its DFS solution first, dry-run it with a small graph, and then solve it using BFS.
+
+
+
+
+
+
+
+
+
+
