@@ -1,0 +1,432 @@
+Great question! Let's understand Adjacency List from the beginning using a simple example.
+
+
+1. What is an Adjacency List?
+An adjacency list is a way to represent a graph in Python.
+
+It stores each node and the list of nodes directly connected to it.
+
+Imagine 4 cities connected by roads:
+
+edges = [
+    [0, 1],
+    [0, 2],
+    [1, 3]
+]
+
+This means:
+- City 0 is connected to city 1.
+- City 0 is connected to city 2.
+- City 1 is connected to city 3.
+
+
+2. Convert this into an Adjacency List
+In Python:
+
+graph = {
+    0: [1, 2],
+    1: [0, 3],
+    2: [0],
+    3: [1]
+}
+
+
+Let's understand this dictionary.
+Key (City)	Value (Connected cities)
+0	            [1, 2]
+1	            [0, 3]
+2	            [0]
+3	            [1]
+
+For example:
+
+graph[0]
+
+
+Output => [1, 2]
+
+
+This means city 0 has two neighboring cities: 1 and 2.
+
+Important: Because this is an undirected graph, 
+we store connections in both directions.
+
+For example
+===========
+graph[0].append(1)
+graph[1].append(0)
+
+
+Why? Because if city 0 connects to city 1, 
+city 1 also connects to city 0.
+
+3. How did we use Adjacency List in LeetCode 1466?
+===================================================
+Remember this code?
+
+graph = [[] for _ in range(n)]
+
+for a, b in connections:
+    graph[a].append((b, 1))
+    graph[b].append((a, 0))
+
+
+Let's break it down.
+
+Suppose:
+
+n = 3
+
+connections = [
+    [0, 1],
+    [2, 1]
+]
+
+First:
+graph = [[], [], []]
+
+Then process [0, 1]:
+
+graph[0].append((1, 1))
+graph[1].append((0, 0))
+
+
+Then process [2, 1]:
+
+graph[2].append((1, 1))
+graph[1].append((2, 0))
+
+
+Final adjacency list:
+
+graph = [
+    [(1, 1)],
+    [(0, 0), (2, 0)],
+    [(1, 1)]
+]
+
+
+Let's understand it:
+City	Neighbors
+0	   (1, 1)
+1	   (0, 0), (2, 0)
+2	   (1, 1)
+
+Here, each neighbor is stored as a tuple:
+
+(neighbor, direction)
+
+
+- neighbor = Connected city.
+- direction = 1 = Original road points away from the DFS starting city along this traversal.
+- direction = 0 = Original road points towards the DFS starting city.
+This extra direction information is specific to our LeetCode 1466 solution. A normal adjacency list doesn't need it.
+
+
+4. Why do we use Adjacency Lists?
+Imagine a graph with 1,000 cities.
+
+Instead of checking every possible city-to-city connection, we can directly find the neighbors of a city.
+
+For example:
+
+for neighbor in graph[0]:
+    print(neighbor)
+
+This gives us only the cities connected to city 0.
+
+This makes graph traversal using DFS and BFS efficient.
+
+
+Remember this simple definition:
+==================================
+An adjacency list is simply a dictionary (or list of lists) that tells us which nodes are directly connected to each node.
+
+
+=======================================================================================================================================================================
+
+
+
+graph = [[] for _ in range(n)]
+
+What does this mean?
+
+n = 3, so Python creates 3 empty lists.
+
+Think of it like this:
+
+graph = [
+    [],  # City 0
+    [],  # City 1
+    []   # City 2
+]
+
+Important: The index represents the city number.
+
+For example:
+
+graph[0]  # Neighbors of city 0
+graph[1]  # Neighbors of city 1
+graph[2]  # Neighbors of city 2
+
+
+Execute the for Loop
+
+for a, b in connections:
+    graph[a].append((b, 1))
+    graph[b].append((a, 0))
+
+
+We have two connections, so this loop executes twice.
+First iteration
+Python picks the first connection:
+
+[0, 1]
+
+Because we wrote:
+
+for a, b in connections:
+
+Python assigns
+
+a = 0
+b = 1
+
+
+graph[a].append((b, 1))
+
+graph[0].append((1, 1))
+
+What happens?
+
+We add (1, 1) to the list at index 0.
+
+Before:
+
+graph = [
+    [],
+    [],
+    []
+]
+
+After:
+
+graph = [
+    [(1, 1)],
+    [],
+    []
+]
+
+
+Now execute the second line:
+
+graph[b].append((a, 0))
+
+Substitute the values:
+
+graph[1].append((0, 0))
+
+
+We add (0, 0) to the list at index 1.
+
+After 
+
+graph = [
+    [(1, 1)],
+    [(0, 0)],
+    []
+]
+
+First iteration completed
+
+Why did we add two entries?
+===========================
+Because we want to visit neighboring cities in both directions during DFS, while remembering the original road direction.
+
+
+===================================================================================================================================
+
+
+graph[0].append((1, 1))
+
+There are three values to understand:
+
+Code	                    Meaning
+graph[0]	               We are storing information in City 0's list.
+First 1	                   City 1 is a neighbour of City 0.
+Second 1	               Direction flag = 1, meaning the original road is 0 → 1.
+
+
+Why do we need the second 1?
+Because we need to know whether we must reverse the road.
+
+In this problem:
+- 1 means the road needs to be reversed when traversing away from City 0.
+- 0 means the road is already pointing towards City 0.
+
+===================================================================================================================================
+
+n = 3
+
+connections = [
+    [0, 1],
+    [2, 1]
+]
+
+graph = [[] for _ in range(n)]
+
+
+Empty List 
+===========
+graph = [
+    [],  # City 0
+    [],  # City 1
+    []   # City 2
+]
+
+
+graph = [
+    [(1, 1)],          # City 0
+    [(0, 0), (2, 0)],  # City 1
+    [(1, 1)]           # City 2
+]
+
+=======================================================================================================================================================================
+
+Given the graph edges:
+
+```
+edges = [    [5, 6],    [6, 7],    [7, 8],    [8, 9]]
+```
+
+Assuming this is an undirected graph, the adjacency list will be:
+
+### 1. Adjacency List (Dictionary)
+
+```
+graph = {    5: [6],    6: [5, 7],    7: [6, 8],    8: [7, 9],    9: [8]}
+```
+
+### 2. Visual representation
+
+```
+5 ---- 6 ---- 7 ---- 8 ---- 9
+```
+
+### 3. How we build it using Python
+
+```
+graph = {}edges = [    [5, 6],    [6, 7],    [7, 8],    [8, 9]]for u, v in edges:    graph.setdefault(u, []).append(v)    graph.setdefault(v, []).append(u)print(graph)
+```
+
+### 4. Dry run
+
+| Edge   | Add to graph |
+| ------ | ------------ |
+| [5, 6] | 5 → 6, 6 → 5 |
+| [6, 7] | 6 → 7, 7 → 6 |
+| [7, 8] | 7 → 8, 8 → 7 |
+| [8, 9] | 8 → 9, 9 → 8 |
+
+Remember:
+
+- Undirected graph: Add both `u → v` and `v → u`.
+- Directed graph: Add only `u → v`.
+
+This is a simple example of an undirected graph that is also a Tree (connected and contains no cycles).
+
+=======================================================================================================================================================================
+
+For a directed graph, we add only one direction for each edge.
+
+Given:
+
+```
+edges = [    [5, 6],    [6, 7],    [7, 8],    [8, 9]]
+```
+
+### 1. Directed Adjacency List
+
+```
+graph = {    5: [6],    6: [7],    7: [8],    8: [9],    9: []}
+```
+
+### 2. Visual representation
+
+```
+5 ----> 6 ----> 7 ----> 8 ----> 9
+```
+
+### 3. Python code
+
+```
+graph = {}edges = [    [5, 6],    [6, 7],    [7, 8],    [8, 9]]for u, v in edges:    graph.setdefault(u, []).append(v)    graph.setdefault(v, [])print(graph)
+```
+
+### 4. Difference between directed and undirected
+
+| Edge   | Directed | Undirected |
+| ------ | -------- | ---------- |
+| [5, 6] | 5 → 6    | 5 ↔ 6      |
+| [6, 7] | 6 → 7    | 6 ↔ 7      |
+| [7, 8] | 7 → 8    | 7 ↔ 8      |
+| [8, 9] | 8 → 9    | 8 ↔ 9      |
+
+Important for LeetCode:
+
+In a directed graph, if you have `5 → 6`, you cannot automatically travel from `6 → 5`.
+
+That's the main difference!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
