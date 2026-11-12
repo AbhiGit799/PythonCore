@@ -10,7 +10,8 @@ Tabulation – Solve smaller problems first using a loop and an array.
 
 
 What is Dynamic Programming (DP) in DSA?
-Dynamic Programming (DP) is an algorithmic technique used to solve complex problems by breaking them into smaller subproblems, solving each subproblem only once, and storing its result so that we can reuse it later.
+Dynamic Programming (DP) is an algorithmic technique used to solve complex problems by breaking them into smaller subproblems, 
+solving each subproblem only once, and storing its result so that we can reuse it later.
 
 In simple words:
 
@@ -137,3 +138,157 @@ class Solution:
 
 obj = Solution()
 print(obj.tribonacci(4))  # Output: 4
+
+# Above is not using Dynamic Programming. It is a simple recursive solution.
+# Above code will give Timeout for large values of n. We can optimize it using Dynamic Programming.
+
+'''
+Look at this line 
+
+return self.tribonacci(n-1) + self.tribonacci(n-2) + self.tribonacci(n-3)
+
+Every function call creates three more function calls.
+
+For example:
+
+tribonacci(5)
+    |
+    |--- tribonacci(4)
+    |       |--- tribonacci(3)
+    |       |--- tribonacci(2)
+    |       |--- tribonacci(1)
+    |
+    |--- tribonacci(3)
+    |       |--- tribonacci(2)
+    |       |--- tribonacci(1)
+    |       |--- tribonacci(0)
+    |
+    |--- tribonacci(2)
+
+
+Notice that tribonacci(3) and tribonacci(2) are calculated repeatedly.
+
+This is called Overlapping Subproblems.
+
+Your code recalculates the same values instead of remembering previous results.
+
+That's why it becomes slow.
+
+
+2. Solution 1 – Memoization
+*****************************
+Let's fix your existing recursive solution without changing its basic approach.
+
+We will introduce a DP array.
+
+
+dp = [-1] * (n + 1)
+
+This line creates a list (array) to store previously calculated Tribonacci numbers.
+
+1. First, understand [-1] * (n + 1)
+Suppose:
+n = 5
+
+dp = [-1] * (5 + 1)
+
+which becomes:
+
+dp = [-1] * 6
+
+Python creates a list containing six -1 values.
+
+dp = [-1, -1, -1, -1, -1, -1]
+
+Why six values?
+
+Because we need to store Fibonacci/Tribonacci values from index 0 to index 5.
+
+
+2. Why are we storing -1?
+
+We use -1 to indicate:
+
+We haven't calculated this value yet.
+
+For example:
+dp = [-1, -1, -1, -1, -1, -1]
+
+
+This means we haven't calculated any values yet.
+
+Once we calculate T(3) = 2, we update:
+
+dp[3] = 2
+
+
+
+Remember this simple rule:
+***************************
+
+dp = [-1] * (n + 1) creates storage for our answers.
+
+-1 means not calculated yet.
+
+dp[n] stores the calculated answer for that particular n.
+
+That's the foundation of Memoization!
+
+
+'''
+
+
+class Solution1:
+    def tribonacci1(self, n: int) -> int:
+
+        dp = [-1] * (n + 1)
+
+        def solve(n):
+
+            if n == 0:
+                return 0
+
+            if n == 1 or n == 2:
+                return 1
+
+            if dp[n] != -1:
+                return dp[n]
+
+            dp[n] = solve(n-1) + solve(n-2) + solve(n-3)
+
+            return dp[n]
+
+        return solve(n)
+    
+
+'''
+3. Solution 2 – Tabulation (Recommended)
+
+We can also solve this problem without recursion.
+
+'''
+
+class Solution2:
+    def tribonacci2(self, n: int) -> int:
+
+        if n == 0:
+            return 0
+
+        if n == 1 or n == 2:
+            return 1
+
+        dp = [0] * (n + 1)
+
+        dp[0] = 0
+        dp[1] = 1
+        dp[2] = 1
+
+        for i in range(3, n + 1):
+
+            dp[i] = dp[i-1] + dp[i-2] + dp[i-3]
+
+        return dp[n]
+
+
+
+
